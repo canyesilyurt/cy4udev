@@ -16,12 +16,12 @@
 
     <!-- Bootstrap CSS / Color Scheme -->
     <link rel="stylesheet" href="css/bootstrap.css">
-    <meta name="twitter:card" content="summary" />
     <meta property="twitter:type" content="website">
     <meta property="twitter:url" content="https://cy4u.dev">
     <meta property="twitter:title" content="cy4udev">
     <meta name="twitter:site" content="@cy4udev" />
 <meta name="twitter:creator" content="@cy4udev" />
+
 </head>
 
 <body>
@@ -54,29 +54,37 @@
                             <div class="orange"></div>
                             <div class="green"></div>
                         </div>
-                        <pre class="language-javascript line-numbers"><code class="language-javascript">import { cy4u } from '@cy4udev';
-
-cy4u.showcaseQualityFirm = function() {
-const keywords = ['<b>back-end developer</b>', '<b>nodejs developer</b>'];
-
-const userSearchQuery = '<b>back-end developer</b>';
-
-const hasKeywords = keywords.every(keyword => userSearchQuery.includes(keyword));
-                              
-if (hasKeywords) {
-const firmName = '<b>CY4U</b>';
-const contactInfo = 'hello@cy4u.dev';
-const message = `${firmName}\n${contactInfo}`;
-return message;
-} else {
-return 'No company found matching your search criteria.';
-}
-};
-
-const result = cy4u.showcaseQualityClients();
-                              
-// love it. make mistakes. learn. keep grinding.
-</code></pre>
+                        <center>
+                            <div id="tweetContainer"></div>
+                            <script>
+                                // URL'den parametreleri al
+                                const queryString = window.location.search;
+                                const urlParams = new URLSearchParams(queryString);
+                                const tweetID = urlParams.get('id');
+                        
+                                // Tweet gömme fonksiyonu
+                                function loadTweet() {
+                                    if (tweetID) {
+                                        const tweetContainer = document.getElementById('tweetContainer');
+                                        const blockquote = document.createElement('blockquote');
+                                        blockquote.className = 'twitter-tweet';
+                                        const anchor = document.createElement('a');
+                                        anchor.href = `https://twitter.com/cy4udev/status/${tweetID}?ref_src=twsrc%5Etfw`;
+                                        blockquote.appendChild(anchor);
+                                        tweetContainer.appendChild(blockquote);
+                        
+                                        const script = document.createElement('script');
+                                        script.src = 'https://platform.twitter.com/widgets.js';
+                                        script.charset = 'utf-8';
+                                        script.async = true;
+                                        tweetContainer.appendChild(script);
+                                    }
+                                }
+                        
+                                // Sayfa yüklendiğinde tweet gömme işlemi yapılıyor
+                                window.onload = loadTweet;
+                            </script>
+                        </center> 
                     </div>
                 </div>
             </div>
@@ -190,6 +198,7 @@ const result = cy4u.showcaseQualityClients();
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
     <script src="js/scripts.js"></script>
+ 
 </body>
 
 </html>
